@@ -1,0 +1,3 @@
+[submodule "src/sourmash"]
+	path = src/sourmash
+	url = https://github.com/dib-lab/sourmash.git

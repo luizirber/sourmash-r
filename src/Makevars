@@ -1,0 +1,13 @@
+LIBDIR = sourmash/target/release
+STATLIB = $(LIBDIR)/libsourmash.a
+PKG_LIBS = -L$(LIBDIR) -lsourmash -lresolv
+
+all: clean
+
+$(SHLIB): $(STATLIB)
+
+$(STATLIB):
+	cargo build --release --manifest-path=sourmash/Cargo.toml
+
+clean:
+	rm -Rf $(SHLIB) $(STATLIB) $(OBJECTS) sourmash/target

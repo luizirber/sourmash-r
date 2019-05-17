@@ -1,0 +1,14 @@
+TARGET = $(subst 64,x86_64,$(subst 32,i686,$(WIN)))-pc-windows-gnu
+LIBDIR = sourmash/target/$(TARGET)/release
+STATLIB = $(LIBDIR)/sourmash.lib
+PKG_LIBS = -L$(LIBDIR) -lsourmash -lws2_32 -ladvapi32 -luserenv
+
+all: clean
+
+$(SHLIB): $(STATLIB)
+
+$(STATLIB):
+	cargo build --target=$(TARGET) --release --manifest-path=sourmash/Cargo.toml
+
+clean:
+	rm -Rf $(SHLIB) $(STATLIB) $(OBJECTS) sourmash/target
